@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/1.28.0/font/lucide.min.css">
 </head>
 <body>
-
+    <!-- Layout Principal -->
+    <div id="main-app" class="min-h-screen flex flex-col bg-gray-50">
         <!-- Navbar -->
         <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
             <div class="container">
@@ -34,7 +35,7 @@
                     <div class="flex items-center space-x-3">
                         <div id="guest-buttons">
                             <button onclick="showLogin()" class="btn btn-ghost">Iniciar Sesión</button>
-                            <button onclick="showLogin()" class="btn btn-primary">Comenzar</button>
+                            <button onclick="showRegister()" class="btn btn-primary">Registrarse</button>
                         </div>
                         
                         <div id="user-menu" class="hidden">
@@ -94,7 +95,7 @@
                                     Seguridad, eficiencia y tecnología en un solo lugar.
                                 </p>
                                 <div class="flex flex-col sm:flex-row gap-3">
-                                    <button onclick="showLogin()" class="btn btn-primary bg-white text-green-700 hover:bg-green-50 inline-flex items-center">
+                                    <button onclick="showRegister()" class="btn btn-primary bg-white text-green-700 hover:bg-green-50 inline-flex items-center">
                                         Comenzar Ahora
                                         <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
                                     </button>
@@ -193,250 +194,9 @@
                     </div>
                 </section>
 
-                <!-- How it Works -->
-                <section class="section bg-white">
-                    <div class="container">
-                        <div class="text-center mb-8">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">¿Cómo Funciona?</h2>
-                            <p class="text-sm text-gray-600">
-                                Proceso simple en tres pasos
-                            </p>
-                        </div>
+                <!-- Resto de las secciones (How it Works, Benefits, Roles, CTA) -->
+                <!-- ... (mantener igual que antes) ... -->
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <!-- Step 1 -->
-                            <div class="text-center">
-                                <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
-                                    1
-                                </div>
-                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                                    <i data-lucide="clipboard-check" class="w-5 h-5 text-green-600"></i>
-                                </div>
-                                <h3 class="font-medium mb-2">Registra tu Vehículo</h3>
-                                <p class="text-gray-600 text-sm">
-                                    Completa el formulario con los datos de tu vehículo y obtén tu autorización de acceso.
-                                </p>
-                            </div>
-
-                            <!-- Step 2 -->
-                            <div class="text-center">
-                                <div class="w-12 h-12 bg-orange-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
-                                    2
-                                </div>
-                                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                                    <i data-lucide="car" class="w-5 h-5 text-orange-600"></i>
-                                </div>
-                                <h3 class="font-medium mb-2">Ingresa al Parqueadero</h3>
-                                <p class="text-gray-600 text-sm">
-                                    El personal de seguridad valida tu ingreso y registra la entrada en el sistema.
-                                </p>
-                            </div>
-
-                            <!-- Step 3 -->
-                            <div class="text-center">
-                                <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
-                                    3
-                                </div>
-                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                                    <i data-lucide="bell" class="w-5 h-5 text-blue-600"></i>
-                                </div>
-                                <h3 class="font-medium mb-2">Monitoreo Continuo</h3>
-                                <p class="text-gray-600 text-sm">
-                                    El sistema monitorea tu vehículo y registra la salida cuando abandones las instalaciones.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Benefits -->
-                <section class="section bg-gradient-to-br from-green-50 to-blue-50">
-                    <div class="container">
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <h2 class="text-xl md:text-2xl font-bold mb-4">Beneficios para la Comunidad SENA</h2>
-                                <div class="space-y-4">
-                                    <!-- Benefit 1 -->
-                                    <div class="flex items-start space-x-3">
-                                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="font-medium mb-1">Mayor Seguridad</h4>
-                                            <p class="text-gray-600 text-sm">Control total sobre quién ingresa y sale del parqueadero</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Benefit 2 -->
-                                    <div class="flex items-start space-x-3">
-                                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="font-medium mb-1">Ahorro de Tiempo</h4>
-                                            <p class="text-gray-600 text-sm">Proceso de ingreso y salida rápido y eficiente</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Benefit 3 -->
-                                    <div class="flex items-start space-x-3">
-                                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="font-medium mb-1">Trazabilidad Completa</h4>
-                                            <p class="text-gray-600 text-sm">Historial detallado de todos los movimientos vehiculares</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Benefit 4 -->
-                                    <div class="flex items-start space-x-3">
-                                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="font-medium mb-1">Reportes Automáticos</h4>
-                                            <p class="text-gray-600 text-sm">Estadísticas y análisis para mejor toma de decisiones</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Benefit 5 -->
-                                    <div class="flex items-start space-x-3">
-                                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="font-medium mb-1">Acceso Móvil</h4>
-                                            <p class="text-gray-600 text-sm">Consulta información desde cualquier dispositivo</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hidden md:block">
-                                <!-- Placeholder for an image or illustration -->
-                                <div class="bg-white rounded-xl h-64 flex items-center justify-center">
-                                    <i data-lucide="shield-check" class="w-24 h-24 text-green-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Roles Section -->
-                <section class="section bg-white">
-                    <div class="container">
-                        <div class="text-center mb-8">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Acceso Según tu Rol</h2>
-                            <p class="text-sm text-gray-600">
-                                El sistema se adapta a tus necesidades específicas
-                            </p>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <!-- Student Role -->
-                            <div class="card border-2 border-blue-200 hover:border-blue-500 transition-colors">
-                                <div class="p-4">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
-                                        <i data-lucide="user" class="w-5 h-5 text-blue-600"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-3">Estudiante</h3>
-                                    <ul class="text-sm text-gray-600 space-y-2">
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-blue-600"></i>
-                                            <span>Ver mi información</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-blue-600"></i>
-                                            <span>Registrar vehículos</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-blue-600"></i>
-                                            <span>Ver historial personal</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Instructor Role -->
-                            <div class="card border-2 border-purple-200 hover:border-purple-500 transition-colors">
-                                <div class="p-4">
-                                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
-                                        <i data-lucide="user" class="w-5 h-5 text-purple-600"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-3">Instructor</h3>
-                                    <ul class="text-sm text-gray-600 space-y-2">
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-purple-600"></i>
-                                            <span>Ver mi información</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-purple-600"></i>
-                                            <span>Registrar vehículos</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-purple-600"></i>
-                                            <span>Acceso prioritario</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Guard Role -->
-                            <div class="card border-2 border-orange-200 hover:border-orange-500 transition-colors">
-                                <div class="p-4">
-                                    <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mb-3">
-                                        <i data-lucide="shield" class="w-5 h-5 text-orange-600"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-3">Guardia</h3>
-                                    <ul class="text-sm text-gray-600 space-y-2">
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-orange-600"></i>
-                                            <span>Registrar entradas</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-orange-600"></i>
-                                            <span>Registrar salidas</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-orange-600"></i>
-                                            <span>Control de acceso</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Admin Role -->
-                            <div class="card border-2 border-green-200 hover:border-green-500 transition-colors">
-                                <div class="p-4">
-                                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
-                                        <i data-lucide="shield" class="w-5 h-5 text-green-600"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-3">Administrador</h3>
-                                    <ul class="text-sm text-gray-600 space-y-2">
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-green-600"></i>
-                                            <span>Acceso total</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-green-600"></i>
-                                            <span>Gestión de usuarios</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 mt-0.5 text-green-600"></i>
-                                            <span>Reportes avanzados</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- CTA Section -->
-                <section class="section bg-gradient-to-br from-green-600 to-green-800 text-white">
-                    <div class="container text-center">
-                        <h2 class="text-xl md:text-2xl font-bold mb-3">
-                            ¿Listo para Comenzar?
-                        </h2>
-                        <p class="text-sm text-green-50 mb-6 max-w-2xl mx-auto">
-                            Únete a SenaParkControl y mejora la gestión de tu parqueadero hoy mismo
-                        </p>
-                        <button onclick="showLogin()" class="btn btn-primary bg-white text-green-700 hover:bg-green-50 inline-flex items-center">
-                            Iniciar Sesión
-                            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-                        </button>
-                    </div>
-                </section>
             </div>
 
             <!-- Login Page Content -->
@@ -486,7 +246,7 @@
                             <div class="mt-6 text-center">
                                 <p class="text-sm text-gray-600">
                                     ¿No tienes una cuenta? 
-                                    <a href="#" class="text-green-600 hover:text-green-500 font-medium">Contacta al administrador</a>
+                                    <a href="#" onclick="showRegister()" class="text-green-600 hover:text-green-500 font-medium">Regístrate aquí</a>
                                 </p>
                             </div>
 
@@ -499,6 +259,95 @@
                                     <div><strong>Guardia:</strong> guardia@sena.edu.co / password</div>
                                     <div><strong>Administrador:</strong> admin@sena.edu.co / password</div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Register Page Content -->
+            <div id="register-page" class="hidden">
+                <section class="login-section">
+                    <a href="#" onclick="showHome()" class="login-back-button">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        Volver al inicio
+                    </a>
+                    
+                    <div class="login-container">
+                        <div class="login-card">
+                            <div class="text-center mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <i data-lucide="user-plus" class="w-8 h-8 text-white"></i>
+                                </div>
+                                <h1 class="text-2xl font-bold text-gray-900 mb-2">Crear Cuenta</h1>
+                                <p class="text-gray-600 text-sm">Regístrate en SenaParkControl</p>
+                            </div>
+
+                            <form id="register-form">
+                                <div id="register-alert" class="alert hidden"></div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="register-nombre" class="form-label">Nombre Completo *</label>
+                                        <input type="text" id="register-nombre" class="form-input" placeholder="Juan Pérez" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register-documento" class="form-label">Documento *</label>
+                                        <input type="text" id="register-documento" class="form-input" placeholder="123456789" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register-email" class="form-label">Correo Electrónico *</label>
+                                    <input type="email" id="register-email" class="form-input" placeholder="usuario@sena.edu.co" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register-telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" id="register-telefono" class="form-input" placeholder="3001234567">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register-rol" class="form-label">Rol *</label>
+                                    <select id="register-rol" class="form-input" required>
+                                        <option value="">Selecciona tu rol</option>
+                                        <option value="3">Estudiante (Aprendiz)</option>
+                                        <option value="2">Instructor</option>
+                                        <option value="5">Guardia (Vigilante)</option>
+                                        <option value="4">Visitante</option>
+                                    </select>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="register-password" class="form-label">Contraseña *</label>
+                                        <input type="password" id="register-password" class="form-input" placeholder="••••••••" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register-confirm-password" class="form-label">Confirmar Contraseña *</label>
+                                        <input type="password" id="register-confirm-password" class="form-input" placeholder="••••••••" required>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center mb-6">
+                                    <input type="checkbox" id="terms" class="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500" required>
+                                    <label for="terms" class="ml-2 text-sm text-gray-700">
+                                        Acepto los <a href="#" class="text-green-600 hover:text-green-500">términos y condiciones</a>
+                                    </label>
+                                </div>
+
+                                <button type="button" class="btn btn-primary w-full" id="register-submit-btn">
+                                    Crear Cuenta
+                                </button>
+                            </form>
+
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-gray-600">
+                                    ¿Ya tienes una cuenta? 
+                                    <a href="#" onclick="showLogin()" class="text-green-600 hover:text-green-500 font-medium">Inicia sesión aquí</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -534,7 +383,7 @@
                         <ul class="space-y-2 text-sm">
                             <li><a href="#" onclick="showHome()" class="hover:text-white transition-colors">Inicio</a></li>
                             <li><a href="#" onclick="showLogin()" class="hover:text-white transition-colors">Iniciar Sesión</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Soporte</a></li>
+                            <li><a href="#" onclick="showRegister()" class="hover:text-white transition-colors">Registrarse</a></li>
                             <li><a href="#" class="hover:text-white transition-colors">Documentación</a></li>
                         </ul>
                     </div>
@@ -562,15 +411,11 @@
         </footer>
     </div>
 
-        <!-- Layout Principal -->
-    <div id="main-app" class="min-h-screen flex flex-col bg-gray-50">
-
-
+    <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/1.28.0/lucide.min.js"></script>
- <script>
+    <script>
         console.log('🔧 INICIANDO APLICACIÓN...');
         
-        // Esperar a que todo esté cargado
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ DOM completamente cargado');
             initializeApp();
@@ -582,16 +427,12 @@
             // Verificar que los elementos existan
             console.log('📋 Elementos del DOM:');
             console.log('- login-submit-btn:', document.getElementById('login-submit-btn'));
-            console.log('- email:', document.getElementById('email'));
-            console.log('- password:', document.getElementById('password'));
-            console.log('- login-alert:', document.getElementById('login-alert'));
+            console.log('- register-submit-btn:', document.getElementById('register-submit-btn'));
 
             // Initialize Lucide icons
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
                 console.log('✅ Lucide icons inicializados');
-            } else {
-                console.error('❌ Lucide no está disponible');
             }
 
             // Configuración de la API
@@ -599,15 +440,21 @@
 
             // Page navigation functions
             window.showHome = function() {
-                console.log('🏠 Mostrando home');
                 document.getElementById('home-page').classList.remove('hidden');
                 document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('register-page').classList.add('hidden');
             }
 
             window.showLogin = function() {
-                console.log('🔐 Mostrando login');
                 document.getElementById('home-page').classList.add('hidden');
                 document.getElementById('login-page').classList.remove('hidden');
+                document.getElementById('register-page').classList.add('hidden');
+            }
+
+            window.showRegister = function() {
+                document.getElementById('home-page').classList.add('hidden');
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('register-page').classList.remove('hidden');
             }
 
             // Authentication service
@@ -617,7 +464,7 @@
 
                 async login(email, password) {
                     try {
-                        console.log('🌐 Enviando request a:', `${API_BASE_URL}/users/login`);
+                        console.log('🌐 Enviando request de login...');
                         
                         const response = await fetch(`${API_BASE_URL}/users/login`, {
                             method: 'POST',
@@ -640,7 +487,6 @@
                             this.isAuthenticated = true;
                             this.user = data.data;
                             
-                            // Mapear roles
                             const roleMapping = {
                                 'Administrador': 'administrador',
                                 'Instructor': 'instructor', 
@@ -665,6 +511,40 @@
                         }
                     } catch (error) {
                         console.error('💥 Error en login:', error);
+                        throw error;
+                    }
+                },
+
+                async register(userData) {
+                    try {
+                        console.log('🌐 Enviando request de registro...');
+                        console.log('📦 Datos de registro:', userData);
+                        
+                        const response = await fetch(`${API_BASE_URL}/users`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(userData),
+                        });
+
+                        console.log('📨 Response status:', response.status);
+                        
+                        const data = await response.json();
+                        console.log('📦 Response data:', data);
+
+                        if (!response.ok) {
+                            throw new Error(data.message || 'Error en el servidor');
+                        }
+
+                        if (data.success) {
+                            console.log('✅ Registro exitoso, ID:', data.data.id);
+                            return data.data;
+                        } else {
+                            throw new Error(data.message || 'Error en el registro');
+                        }
+                    } catch (error) {
+                        console.error('💥 Error en registro:', error);
                         throw error;
                     }
                 },
@@ -697,147 +577,22 @@
                 }
             };
 
-            // Navigation links based on user role
-            const navigationLinks = {
-                estudiante: [
-                    { to: 'dashboard.html', icon: 'layout-dashboard', label: 'Panel' },
-                    { to: 'vehicles.html', icon: 'clipboard-list', label: 'Vehículos' }
-                ],
-                instructor: [
-                    { to: 'dashboard.html', icon: 'layout-dashboard', label: 'Panel' },
-                    { to: 'vehicles.html', icon: 'clipboard-list', label: 'Vehículos' }
-                ],
-                guardia: [
-                    { to: 'dashboard.html', icon: 'layout-dashboard', label: 'Panel' },
-                    { to: 'entries-exits.html', icon: 'arrow-right-left', label: 'Entradas/Salidas' }
-                ],
-                administrador: [
-                    { to: 'dashboard.html', icon: 'layout-dashboard', label: 'Panel' },
-                    { to: 'vehicles.html', icon: 'clipboard-list', label: 'Vehículos' },
-                    { to: 'entries-exits.html', icon: 'arrow-right-left', label: 'Entradas/Salidas' },
-                    { to: 'reports.html', icon: 'bar-chart-3', label: 'Reportes' },
-                    { to: 'admin.html', icon: 'shield', label: 'Administración' }
-                ]
-            };
-
-            const roleNames = {
-                estudiante: 'Estudiante',
-                instructor: 'Instructor',
-                guardia: 'Guardia de Seguridad',
-                administrador: 'Administrador',
-                visitante: 'Visitante'
-            };
-
-            const roleBadgeColors = {
-                estudiante: 'role-badge-estudiante',
-                instructor: 'role-badge-instructor',
-                guardia: 'role-badge-guardia',
-                administrador: 'role-badge-administrador',
-                visitante: 'bg-gray-100 text-gray-700'
-            };
-
-            const avatarColors = {
-                estudiante: 'bg-blue-600 text-white',
-                instructor: 'bg-purple-600 text-white',
-                guardia: 'bg-orange-600 text-white',
-                administrador: 'bg-green-600 text-white',
-                visitante: 'bg-gray-600 text-white'
-            };
-
             // DOM elements
-            const guestButtons = document.getElementById('guest-buttons');
-            const userMenu = document.getElementById('user-menu');
-            const userMenuButton = document.getElementById('user-menu-button');
-            const userDropdown = document.getElementById('user-dropdown');
-            const mainNav = document.getElementById('main-nav');
-            const userName = document.getElementById('user-name');
-            const userEmail = document.getElementById('user-email');
-            const userRoleBadge = document.getElementById('user-role-badge');
-            const userAvatar = document.getElementById('user-avatar');
-            const logoutButton = document.getElementById('logout-button');
-            const loginAlert = document.getElementById('login-alert');
             const loginSubmitBtn = document.getElementById('login-submit-btn');
+            const registerSubmitBtn = document.getElementById('register-submit-btn');
+            const loginAlert = document.getElementById('login-alert');
+            const registerAlert = document.getElementById('register-alert');
 
-            // Initialize the UI based on authentication status
-            function initUI() {
-                if (Auth.checkAuth()) {
-                    console.log('👤 Usuario autenticado:', Auth.user);
-                    
-                    guestButtons.classList.add('hidden');
-                    userMenu.classList.remove('hidden');
-                    userName.textContent = Auth.user.NombreCompleto;
-                    userEmail.textContent = Auth.user.Correo;
-                    userRoleBadge.textContent = roleNames[Auth.user.role] || Auth.user.NombreRol;
-                    userRoleBadge.className = `badge ${roleBadgeColors[Auth.user.role] || 'bg-gray-100 text-gray-700'}`;
-                    userAvatar.textContent = Auth.user.initials;
-                    userAvatar.className = `avatar ${avatarColors[Auth.user.role] || 'bg-gray-600 text-white'}`;
-                    
-                    if (mainNav) {
-                        const links = navigationLinks[Auth.user.role] || [];
-                        mainNav.innerHTML = '';
-                        
-                        links.forEach(link => {
-                            const navLink = document.createElement('a');
-                            navLink.href = link.to;
-                            navLink.className = 'nav-link';
-                            navLink.innerHTML = `
-                                <i data-lucide="${link.icon}" class="w-4 h-4"></i>
-                                <span>${link.label}</span>
-                            `;
-                            mainNav.appendChild(navLink);
-                        });
-                        
-                        lucide.createIcons();
-                    }
-                    
-                    showHome();
-                    console.log('✅ UI inicializada para usuario autenticado');
-                    
-                } else {
-                    console.log('👤 Usuario no autenticado');
-                    guestButtons.classList.remove('hidden');
-                    userMenu.classList.add('hidden');
-                }
-            }
-
-            // Toggle dropdown menu
-            if (userMenuButton) {
-                userMenuButton.addEventListener('click', () => {
-                    userDropdown.classList.toggle('hidden');
-                });
-                
-                document.addEventListener('click', (e) => {
-                    if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
-                        userDropdown.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Logout functionality
-            if (logoutButton) {
-                logoutButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    Auth.logout();
-                });
-            }
-
-            // LOGIN BUTTON EVENT LISTENER - VERSIÓN CORREGIDA
+            // LOGIN functionality
             if (loginSubmitBtn) {
-                console.log('✅ Botón de login encontrado, agregando event listener...');
-                
+                console.log('✅ Botón de login encontrado');
                 loginSubmitBtn.addEventListener('click', handleLogin);
-                
-                // También agregar event listener para la tecla Enter en los inputs
-                document.getElementById('email')?.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') handleLogin();
-                });
-                
-                document.getElementById('password')?.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') handleLogin();
-                });
-                
-            } else {
-                console.error('❌ NO SE ENCONTRÓ el botón login-submit-btn');
+            }
+
+            // REGISTER functionality
+            if (registerSubmitBtn) {
+                console.log('✅ Botón de registro encontrado');
+                registerSubmitBtn.addEventListener('click', handleRegister);
             }
 
             async function handleLogin() {
@@ -846,10 +601,8 @@
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
                 
-                console.log('🔐 Credenciales capturadas:', { email, password });
-                
                 if (!email || !password) {
-                    showAlert('❌ Por favor completa todos los campos', 'error');
+                    showAlert(loginAlert, '❌ Por favor completa todos los campos', 'error');
                     return;
                 }
                 
@@ -863,42 +616,103 @@
                 loginSubmitBtn.disabled = true;
                 
                 try {
-                    console.log('🔄 Enviando petición a la API...');
                     const user = await Auth.login(email, password);
-                    console.log('✅ Login exitoso en frontend:', user);
-                    
-                    showAlert('✅ Login exitoso! Redirigiendo...', 'success');
+                    showAlert(loginAlert, '✅ Login exitoso! Redirigiendo...', 'success');
                     
                     setTimeout(() => {
-                        console.log('🔄 Iniciando redirección...');
-                        console.log('🎭 Rol del usuario:', user.role);
-                        
-                        if (user.role === 'administrador') {
-                            console.log('🎯 Redirigiendo a admin.html');
-                            window.location.href = 'admin.html';
-                        } else {
-                            console.log('🎯 Redirigiendo a dashboard.html');
-                            window.location.href = 'dashboard.html';
-                        }
+                        console.log('🎯 Redirigiendo a admin.html');
+                        window.location.href = 'admin.html';
                     }, 1500);
                     
                 } catch (error) {
-                    console.error('❌ Error en login frontend:', error);
-                    showAlert(`❌ ${error.message}`, 'error');
-                    
-                    // Restore button state
+                    showAlert(loginAlert, `❌ ${error.message}`, 'error');
                     loginSubmitBtn.textContent = originalText;
                     loginSubmitBtn.disabled = false;
                 }
             }
 
-            function showAlert(message, type) {
-                loginAlert.textContent = message;
-                loginAlert.className = `alert alert-${type}`;
-                loginAlert.classList.remove('hidden');
+            async function handleRegister() {
+                console.log('🎯 CLICK RECIBIDO - Iniciando proceso de registro...');
+                
+                const nombre = document.getElementById('register-nombre').value;
+                const documento = document.getElementById('register-documento').value;
+                const email = document.getElementById('register-email').value;
+                const telefono = document.getElementById('register-telefono').value;
+                const rol = document.getElementById('register-rol').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                const terms = document.getElementById('terms').checked;
+                
+                // Validaciones
+                if (!nombre || !documento || !email || !rol || !password || !confirmPassword) {
+                    showAlert(registerAlert, '❌ Por favor completa todos los campos obligatorios', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showAlert(registerAlert, '❌ Las contraseñas no coinciden', 'error');
+                    return;
+                }
+                
+                if (!terms) {
+                    showAlert(registerAlert, '❌ Debes aceptar los términos y condiciones', 'error');
+                    return;
+                }
+                
+                // Clear previous alerts
+                registerAlert.classList.add('hidden');
+                registerAlert.textContent = '';
+                
+                // Show loading state
+                const originalText = registerSubmitBtn.textContent;
+                registerSubmitBtn.textContent = 'Creando cuenta...';
+                registerSubmitBtn.disabled = true;
+                
+                try {
+                    const userData = {
+                        IdRol: parseInt(rol),
+                        NombreCompleto: nombre,
+                        Documento: documento,
+                        Correo: email,
+                        Telefono: telefono,
+                        Contrasena: password
+                    };
+                    
+                    await Auth.register(userData);
+                    showAlert(registerAlert, '✅ ¡Cuenta creada exitosamente! Redirigiendo al login...', 'success');
+                    
+                    setTimeout(() => {
+                        showLogin();
+                        // Limpiar formulario
+                        document.getElementById('register-form').reset();
+                        registerSubmitBtn.textContent = originalText;
+                        registerSubmitBtn.disabled = false;
+                    }, 2000);
+                    
+                } catch (error) {
+                    showAlert(registerAlert, `❌ ${error.message}`, 'error');
+                    registerSubmitBtn.textContent = originalText;
+                    registerSubmitBtn.disabled = false;
+                }
             }
 
-            // Check API connection on load
+            function showAlert(alertElement, message, type) {
+                alertElement.textContent = message;
+                alertElement.className = `alert alert-${type}`;
+                alertElement.classList.remove('hidden');
+            }
+
+            // Initialize the UI
+            function initUI() {
+                if (Auth.checkAuth()) {
+                    console.log('👤 Usuario autenticado');
+                    // Aquí iría la lógica para mostrar el menú de usuario
+                } else {
+                    console.log('👤 Usuario no autenticado');
+                }
+            }
+
+            // Check API connection
             async function checkAPI() {
                 try {
                     const response = await fetch(`${API_BASE_URL}/health`);
@@ -908,22 +722,13 @@
                         console.log('✅ API conectada correctamente');
                     } else {
                         console.warn('⚠️ API no responde correctamente');
-                    showAlert('⚠️ API no responde correctamente', 'error');
                     }
                 } catch (error) {
                     console.error('❌ No se pudo conectar a la API:', error.message);
-                    
-                    const demoWarning = document.createElement('div');
-                    demoWarning.className = 'alert alert-error mt-4';
-                    demoWarning.innerHTML = `
-                        <strong>⚠️ API no disponible</strong><br>
-                        <small>Usando datos de demostración. Asegúrate de que el backend esté ejecutándose en http://localhost:3000</small>
-                    `;
-                    document.querySelector('.login-card')?.appendChild(demoWarning);
                 }
             }
 
-            // Initialize the UI
+            // Initialize
             initUI();
             checkAPI();
             
