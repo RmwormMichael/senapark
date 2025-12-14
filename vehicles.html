@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Vehículos - SenaParkControl</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/1.28.0/font/lucide.min.css">
+    <style>
+        :root {
+            --font-size: 16px;
+            --background: #ffffff;
+            --foreground: #242424;
+            --card: #ffffff;
+            --card-foreground: #242424;
+            --primary: #030213;
+            --primary-foreground: #ffffff;
+            --secondary: #f2f2f7;
+            --secondary-foreground: #030213;
+            --muted: #ececf0;
+            --muted-foreground: #717182;
+            --accent: #e9ebef;
+            --accent-foreground: #030213;
+            --destructive: #d4183d;
+            --destructive-foreground: #ffffff;
+            --border: rgba(0, 0, 0, 0.1);
+            --input-background: #f3f3f5;
+            --radius: 0.625rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
+            color: var(--foreground);
+            line-height: 1.5;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #15803d;
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: #4b5563;
+        }
+
+        .btn-ghost:hover {
+            background-color: #f3f4f6;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid currentColor;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(22, 163, 74, 0.1);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 50;
+            min-width: 12rem;
+            padding: 0.5rem 0;
+            right: 0;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: #374151;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .avatar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            overflow: hidden;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-link.active {
+            background-color: #f0fdf4;
+            color: #15803d;
+        }
+
+        .nav-link:not(.active) {
+            color: #4b5563;
+        }
+
+        .nav-link:not(.active):hover {
+            background-color: #f9fafb;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        @media (min-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            
+            .grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .md\\:flex {
+                display: flex;
+            }
+            
+            .md\\:hidden {
+                display: none;
+            }
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background-color: #f9fafb;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #16a34a;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .tab.active {
+            color: #16a34a;
+            border-bottom-color: #16a34a;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Estilos específicos para vehículos */
+        .vehicle-plate {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            background-color: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .status-active {
+            color: #16a34a;
+            background-color: #f0fdf4;
+        }
+
+        .status-inactive {
+            color: #dc2626;
+            background-color: #fef2f2;
+        }
+
+        .status-pending {
+            color: #ea580c;
+            background-color: #fff7ed;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Layout -->
+    <div class="min-h-screen flex flex-col bg-gray-50">
+        <!-- Navbar -->
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+            <div class="container">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center">
+                            <i data-lucide="car" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-semibold text-gray-900">SenaParkControl</span>
+                            <span class="text-xs text-gray-500">Sistema de Parqueaderos</span>
+                        </div>
+                    </a>
+
+                    <!-- Navigation Menu -->
+                    <nav class="hidden md:flex items-center space-x-1">
+                        <a href="dashboard.html" class="nav-link">
+                            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                            <span>Panel</span>
+                        </a>
+                        <a href="vehicles.html" class="nav-link active">
+                            <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+                            <span>Vehículos</span>
+                        </a>
+                        <a href="entries-exits.html" class="nav-link">
+                            <i data-lucide="arrow-right-left" class="w-4 h-4"></i>
+                            <span>Entradas/Salidas</span>
+                        </a>
+                        <a href="reports.html" class="nav-link">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                            <span>Reportes</span>
+                        </a>
+                        <a href="admin.html" class="nav-link">
+                            <i data-lucide="shield" class="w-4 h-4"></i>
+                            <span>Administración</span>
+                        </a>
+                    </nav>
+
+                    <!-- User Menu -->
+                    <div class="flex items-center space-x-3">
+                        <div class="dropdown">
+                            <button class="btn btn-ghost relative h-10 w-10 rounded-full" id="user-menu-button">
+                                <div class="avatar bg-green-600 text-white" id="user-avatar">
+                                    AU
+                                </div>
+                            </button>
+                            <div class="dropdown-content hidden" id="user-dropdown">
+                                <div class="p-4 border-b border-gray-100">
+                                    <p id="user-name" class="font-medium">Admin User</p>
+                                    <p id="user-email" class="text-xs text-gray-500">admin@sena.edu.co</p>
+                                    <div class="badge mt-2 bg-green-100 text-green-700">
+                                        <i data-lucide="user-circle" class="w-3 h-3 mr-1"></i>
+                                        Administrador
+                                    </div>
+                                </div>
+                                <a href="profile.html" class="dropdown-item">
+                                    <i data-lucide="user" class="w-4 h-4 mr-2"></i>
+                                    Mi Perfil
+                                </a>
+                                <a href="settings.html" class="dropdown-item">
+                                    <i data-lucide="settings" class="w-4 h-4 mr-2"></i>
+                                    Configuración
+                                </a>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <a href="#" class="dropdown-item text-red-600" id="logout-button">
+                                    <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 py-8">
+            <div class="container">
+                <!-- Header -->
+                <div class="mb-8">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i data-lucide="car" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h1 class="text-3xl font-bold">Gestión de Vehículos</h1>
+                    </div>
+                    <p class="text-gray-600">Registro y administración de vehículos autorizados</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-gray-600">Total de Vehículos</p>
+                                <i data-lucide="car" class="w-4 h-4 text-blue-600"></i>
+                            </div>
+                            <p class="text-3xl font-bold" id="total-vehicles">12</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-gray-600">Vehículos Activos</p>
+                                <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <p class="text-3xl font-bold" id="active-vehicles">10</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-gray-600">En Parqueadero</p>
+                                <i data-lucide="parking-circle" class="w-4 h-4 text-orange-600"></i>
+                            </div>
+                            <p class="text-3xl font-bold" id="parked-vehicles">4</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm text-gray-600">Por Aprobar</p>
+                                <i data-lucide="alert-circle" class="w-4 h-4 text-purple-600"></i>
+                            </div>
+                            <p class="text-3xl font-bold" id="pending-vehicles">2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab active" data-tab="all">Todos los Vehículos</div>
+                    <div class="tab" data-tab="active">Activos</div>
+                    <div class="tab" data-tab="pending">Pendientes</div>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0 mb-6">
+                    <div class="relative w-full md:w-auto">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                        <input type="text" id="search-vehicles" placeholder="Buscar por placa, propietario..." class="form-input pl-10 w-full md:w-64">
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="btn btn-outline">
+                            <i data-lucide="filter" class="w-4 h-4 mr-2"></i>
+                            Filtrar
+                        </button>
+                        <button class="btn btn-primary" id="add-vehicle-btn">
+                            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                            Nuevo Vehículo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- All Vehicles Tab -->
+                <div id="all-tab" class="tab-content active">
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2">
+                            <div class="card">
+                                <div class="p-6">
+                                    <h2 class="text-xl font-bold mb-6">Lista de Vehículos Registrados</h2>
+                                    <div class="space-y-4" id="vehicles-list">
+                                        <!-- Vehicle items will be dynamically added here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div>
+                            <div class="card mb-6">
+                                <div class="p-6">
+                                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                                        <i data-lucide="zap" class="w-5 h-5 mr-2"></i>
+                                        Acciones Rápidas
+                                    </h2>
+                                    <div class="space-y-3">
+                                        <button class="btn btn-outline w-full justify-start" id="export-data-btn">
+                                            <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                                            Exportar Datos
+                                        </button>
+                                        <button class="btn btn-outline w-full justify-start" id="import-data-btn">
+                                            <i data-lucide="upload" class="w-4 h-4 mr-2"></i>
+                                            Importar Vehículos
+                                        </button>
+                                        <button class="btn btn-outline w-full justify-start" id="print-list-btn">
+                                            <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
+                                            Imprimir Lista
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Vehicle Stats -->
+                            <div class="card">
+                                <div class="p-6">
+                                    <h2 class="text-xl font-bold mb-4">Estadísticas</h2>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <p class="text-sm text-gray-600 mb-1">Distribución por Tipo</p>
+                                            <div class="space-y-2">
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Automóviles</span>
+                                                    <span class="font-semibold">8 (67%)</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Motocicletas</span>
+                                                    <span class="font-semibold">3 (25%)</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-sm">Otros</span>
+                                                    <span class="font-semibold">1 (8%)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-4 border-t border-gray-200">
+                                            <p class="text-sm text-gray-600 mb-1">Estado Actual</p>
+                                            <div class="space-y-2">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-sm">Dentro del parqueadero</span>
+                                                    <span class="badge status-active">4</span>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-sm">Fuera del parqueadero</span>
+                                                    <span class="badge">6</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Vehicles Tab -->
+                <div id="active-tab" class="tab-content">
+                    <div class="card">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold mb-6">Vehículos Activos</h2>
+                            <div class="space-y-4" id="active-vehicles-list">
+                                <!-- Active vehicles will be filtered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Vehicles Tab -->
+                <div id="pending-tab" class="tab-content">
+                    <div class="card">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold mb-6">Vehículos Pendientes de Aprobación</h2>
+                            <div class="space-y-4" id="pending-vehicles-list">
+                                <!-- Pending vehicles will be filtered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Add/Edit Vehicle -->
+    <div class="modal" id="vehicle-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-bold" id="modal-title">Nuevo Vehículo</h3>
+                <button class="btn btn-ghost" id="close-modal">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="vehicle-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label class="form-label">Placa</label>
+                            <input type="text" id="plate" class="form-input" placeholder="ABC123" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Vehículo</label>
+                            <select id="type" class="form-input" required>
+                                <option value="">Seleccionar</option>
+                                <option value="car">Automóvil</option>
+                                <option value="motorcycle">Motocicleta</option>
+                                <option value="truck">Camión</option>
+                                <option value="van">Furgoneta</option>
+                                <option value="bicycle">Bicicleta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Marca</label>
+                        <input type="text" id="brand" class="form-input" placeholder="Toyota, Honda, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Modelo</label>
+                        <input type="text" id="model" class="form-input" placeholder="2023, Corolla, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Color</label>
+                        <input type="text" id="color" class="form-input" placeholder="Rojo, Azul, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Propietario</label>
+                        <input type="text" id="owner" class="form-input" placeholder="Nombre del propietario" required>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label class="form-label">Documento de Identidad</label>
+                            <input type="text" id="document" class="form-input" placeholder="123456789" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="3001234567">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" id="email" class="form-input" placeholder="propietario@ejemplo.com">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label class="form-label">Estado</label>
+                            <select id="status" class="form-input" required>
+                                <option value="active">Activo</option>
+                                <option value="inactive">Inactivo</option>
+                                <option value="pending">Pendiente</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Fecha de Registro</label>
+                            <input type="date" id="registration-date" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Observaciones</label>
+                        <textarea id="observations" class="form-input" rows="3" placeholder="Observaciones adicionales..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancel-modal">Cancelar</button>
+                <button class="btn btn-primary" id="save-vehicle">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/1.28.0/lucide.min.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Sample vehicle data (simulating database)
+        let vehicles = [
+            {
+                id: 1,
+                plate: "ABC123",
+                type: "car",
+                brand: "Toyota",
+                model: "Corolla 2023",
+                color: "Rojo",
+                owner: "Carlos Ramírez",
+                document: "123456789",
+                phone: "3001234567",
+                email: "carlos.ramirez@sena.edu.co",
+                status: "active",
+                isParked: true,
+                registrationDate: "2024-01-15",
+                observations: "Vehículo asignado a instructor"
+            },
+            {
+                id: 2,
+                plate: "DEF456",
+                type: "motorcycle",
+                brand: "Yamaha",
+                model: "YZF-R3 2024",
+                color: "Azul",
+                owner: "Ana López",
+                document: "987654321",
+                phone: "3109876543",
+                email: "ana.lopez@sena.edu.co",
+                status: "active",
+                isParked: false,
+                registrationDate: "2024-02-10",
+                observations: "Motocicleta personal"
+            },
+            {
+                id: 3,
+                plate: "GHI789",
+                type: "car",
+                brand: "Mazda",
+                model: "CX-5 2023",
+                color: "Blanco",
+                owner: "Luis Fernández",
+                document: "456789123",
+                phone: "3204567891",
+                email: "luis.fernandez@sena.edu.co",
+                status: "active",
+                isParked: true,
+                registrationDate: "2024-01-20",
+                observations: ""
+            },
+            {
+                id: 4,
+                plate: "JKL012",
+                type: "truck",
+                brand: "Ford",
+                model: "F-150 2022",
+                color: "Negro",
+                owner: "Pedro Gómez",
+                document: "789123456",
+                phone: "3157891234",
+                email: "pedro.gomez@sena.edu.co",
+                status: "pending",
+                isParked: false,
+                registrationDate: "2024-03-01",
+                observations: "Pendiente de verificación de documentos"
+            },
+            {
+                id: 5,
+                plate: "MNO345",
+                type: "van",
+                brand: "Mercedes-Benz",
+                model: "Sprinter 2023",
+                color: "Gris",
+                owner: "Transportes SENA",
+                document: "321654987",
+                phone: "3013216549",
+                email: "transporte@sena.edu.co",
+                status: "active",
+                isParked: false,
+                registrationDate: "2024-01-05",
+                observations: "Vehículo institucional"
+            },
+            {
+                id: 6,
+                plate: "PQR678",
+                type: "car",
+                brand: "Hyundai",
+                model: "Tucson 2024",
+                color: "Plateado",
+                owner: "María Rodríguez",
+                document: "654987321",
+                phone: "3176549873",
+                email: "maria.rodriguez@sena.edu.co",
+                status: "inactive",
+                isParked: false,
+                registrationDate: "2023-12-15",
+                observations: "Vehículo retirado temporalmente"
+            }
+        ];
+
+        // Current vehicle being edited
+        let currentVehicleId = null;
+
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Filter vehicles based on tab
+                    filterVehiclesByTab(tabId);
+                });
+            });
+
+            // Dropdown functionality
+            const userMenuButton = document.getElementById('user-menu-button');
+            const userDropdown = document.getElementById('user-dropdown');
+            const logoutButton = document.getElementById('logout-button');
+
+            if (userMenuButton) {
+                userMenuButton.addEventListener('click', () => {
+                    userDropdown.classList.toggle('hidden');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Logout functionality
+            if (logoutButton) {
+                logoutButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('auth');
+                    window.location.href = 'index.html';
+                });
+            }
+
+            // Check authentication
+            const auth = localStorage.getItem('auth');
+            if (!auth || !JSON.parse(auth).isAuthenticated) {
+                window.location.href = 'login.html';
+            }
+
+            // Initialize vehicles
+            renderVehicles();
+            updateStats();
+
+            // Modal functionality
+            const addVehicleBtn = document.getElementById('add-vehicle-btn');
+            const closeModalBtn = document.getElementById('close-modal');
+            const cancelModalBtn = document.getElementById('cancel-modal');
+            const vehicleModal = document.getElementById('vehicle-modal');
+            const saveVehicleBtn = document.getElementById('save-vehicle');
+            const vehicleForm = document.getElementById('vehicle-form');
+
+            // Set today's date as default
+            document.getElementById('registration-date').valueAsDate = new Date();
+
+            // Open modal for adding new vehicle
+            addVehicleBtn.addEventListener('click', () => {
+                currentVehicleId = null;
+                document.getElementById('modal-title').textContent = 'Nuevo Vehículo';
+                vehicleForm.reset();
+                document.getElementById('registration-date').valueAsDate = new Date();
+                vehicleModal.classList.add('active');
+            });
+
+            // Close modal
+            closeModalBtn.addEventListener('click', () => {
+                vehicleModal.classList.remove('active');
+            });
+
+            cancelModalBtn.addEventListener('click', () => {
+                vehicleModal.classList.remove('active');
+            });
+
+            // Save vehicle
+            saveVehicleBtn.addEventListener('click', () => {
+                if (vehicleForm.checkValidity()) {
+                    saveVehicle();
+                    vehicleModal.classList.remove('active');
+                } else {
+                    vehicleForm.reportValidity();
+                }
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-vehicles');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                filterVehicles(searchTerm);
+            });
+
+            // Quick actions
+            document.getElementById('export-data-btn').addEventListener('click', exportData);
+            document.getElementById('import-data-btn').addEventListener('click', importData);
+            document.getElementById('print-list-btn').addEventListener('click', printList);
+        });
+
+        // Render vehicles list
+        function renderVehicles(filteredVehicles = vehicles) {
+            const vehiclesList = document.getElementById('vehicles-list');
+            const activeVehiclesList = document.getElementById('active-vehicles-list');
+            const pendingVehiclesList = document.getElementById('pending-vehicles-list');
+            
+            // Clear existing lists
+            vehiclesList.innerHTML = '';
+            activeVehiclesList.innerHTML = '';
+            pendingVehiclesList.innerHTML = '';
+            
+            filteredVehicles.forEach(vehicle => {
+                const vehicleElement = createVehicleElement(vehicle);
+                vehiclesList.appendChild(vehicleElement.cloneNode(true));
+                
+                // Add to appropriate filtered lists
+                if (vehicle.status === 'active') {
+                    activeVehiclesList.appendChild(vehicleElement.cloneNode(true));
+                } else if (vehicle.status === 'pending') {
+                    pendingVehiclesList.appendChild(vehicleElement.cloneNode(true));
+                }
+            });
+            
+            // If no vehicles found
+            if (filteredVehicles.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.className = 'text-center py-8 text-gray-500';
+                noResults.innerHTML = '<i data-lucide="car-off" class="w-12 h-12 mx-auto mb-4"></i><p>No se encontraron vehículos</p>';
+                vehiclesList.appendChild(noResults);
+                activeVehiclesList.appendChild(noResults.cloneNode(true));
+                pendingVehiclesList.appendChild(noResults.cloneNode(true));
+            }
+        }
+
+        // Create vehicle element
+        function createVehicleElement(vehicle) {
+            const vehicleElement = document.createElement('div');
+            vehicleElement.className = 'flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors';
+            vehicleElement.setAttribute('data-vehicle-id', vehicle.id);
+            
+            // Vehicle type icon and color
+            let typeIcon = 'car';
+            let typeColor = 'text-blue-600';
+            let typeText = 'Automóvil';
+            
+            switch(vehicle.type) {
+                case 'motorcycle':
+                    typeIcon = 'bike';
+                    typeColor = 'text-orange-600';
+                    typeText = 'Motocicleta';
+                    break;
+                case 'truck':
+                    typeIcon = 'truck';
+                    typeColor = 'text-purple-600';
+                    typeText = 'Camión';
+                    break;
+                case 'van':
+                    typeIcon = 'van';
+                    typeColor = 'text-indigo-600';
+                    typeText = 'Furgoneta';
+                    break;
+                case 'bicycle':
+                    typeIcon = 'bicycle';
+                    typeColor = 'text-green-600';
+                    typeText = 'Bicicleta';
+                    break;
+            }
+            
+            // Status badge
+            let statusClass = 'status-active';
+            let statusText = 'Activo';
+            
+            switch(vehicle.status) {
+                case 'inactive':
+                    statusClass = 'status-inactive';
+                    statusText = 'Inactivo';
+                    break;
+                case 'pending':
+                    statusClass = 'status-pending';
+                    statusText = 'Pendiente';
+                    break;
+            }
+            
+            vehicleElement.innerHTML = `
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 ${typeColor} flex items-center justify-center">
+                        <i data-lucide="${typeIcon}" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="vehicle-plate">${vehicle.plate}</span>
+                            <span class="badge ${statusClass} text-xs">${statusText}</span>
+                            ${vehicle.isParked ? '<span class="badge bg-orange-100 text-orange-700 text-xs">En Parqueadero</span>' : ''}
+                        </div>
+                        <p class="font-semibold">${vehicle.owner}</p>
+                        <p class="text-sm text-gray-600">${typeText} • ${vehicle.brand} ${vehicle.model} • ${vehicle.color}</p>
+                        <p class="text-xs text-gray-500 mt-1">Registrado: ${vehicle.registrationDate}</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="btn btn-ghost edit-vehicle" title="Editar">
+                        <i data-lucide="edit" class="w-4 h-4"></i>
+                    </button>
+                    <button class="btn btn-ghost delete-vehicle text-red-600" title="Eliminar">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Add event listeners to buttons
+            const editBtn = vehicleElement.querySelector('.edit-vehicle');
+            const deleteBtn = vehicleElement.querySelector('.delete-vehicle');
+            
+            editBtn.addEventListener('click', () => editVehicle(vehicle.id));
+            deleteBtn.addEventListener('click', () => deleteVehicle(vehicle.id));
+            
+            // Re-initialize icons in the new element
+            lucide.createIcons();
+            
+            return vehicleElement;
+        }
+
+        // Update statistics
+        function updateStats() {
+            const total = vehicles.length;
+            const active = vehicles.filter(v => v.status === 'active').length;
+            const parked = vehicles.filter(v => v.isParked).length;
+            const pending = vehicles.filter(v => v.status === 'pending').length;
+            
+            document.getElementById('total-vehicles').textContent = total;
+            document.getElementById('active-vehicles').textContent = active;
+            document.getElementById('parked-vehicles').textContent = parked;
+            document.getElementById('pending-vehicles').textContent = pending;
+        }
+
+        // Filter vehicles by search term
+        function filterVehicles(searchTerm) {
+            const filtered = vehicles.filter(vehicle => 
+                vehicle.plate.toLowerCase().includes(searchTerm) ||
+                vehicle.owner.toLowerCase().includes(searchTerm) ||
+                vehicle.brand.toLowerCase().includes(searchTerm) ||
+                vehicle.model.toLowerCase().includes(searchTerm)
+            );
+            renderVehicles(filtered);
+        }
+
+        // Filter vehicles by tab
+        function filterVehiclesByTab(tabId) {
+            let filtered = vehicles;
+            
+            if (tabId === 'active') {
+                filtered = vehicles.filter(v => v.status === 'active');
+            } else if (tabId === 'pending') {
+                filtered = vehicles.filter(v => v.status === 'pending');
+            }
+            
+            renderVehicles(filtered);
+        }
+
+        // Edit vehicle
+        function editVehicle(id) {
+            const vehicle = vehicles.find(v => v.id === id);
+            if (!vehicle) return;
+            
+            currentVehicleId = id;
+            document.getElementById('modal-title').textContent = 'Editar Vehículo';
+            
+            // Fill form with vehicle data
+            document.getElementById('plate').value = vehicle.plate;
+            document.getElementById('type').value = vehicle.type;
+            document.getElementById('brand').value = vehicle.brand;
+            document.getElementById('model').value = vehicle.model;
+            document.getElementById('color').value = vehicle.color;
+            document.getElementById('owner').value = vehicle.owner;
+            document.getElementById('document').value = vehicle.document;
+            document.getElementById('phone').value = vehicle.phone;
+            document.getElementById('email').value = vehicle.email;
+            document.getElementById('status').value = vehicle.status;
+            document.getElementById('registration-date').value = vehicle.registrationDate;
+            document.getElementById('observations').value = vehicle.observations || '';
+            
+            // Show modal
+            document.getElementById('vehicle-modal').classList.add('active');
+        }
+
+        // Save vehicle (add or update)
+        function saveVehicle() {
+            const form = document.getElementById('vehicle-form');
+            const formData = new FormData(form);
+            
+            const vehicleData = {
+                id: currentVehicleId || Date.now(), // Use timestamp as ID for new vehicles
+                plate: formData.get('plate'),
+                type: formData.get('type'),
+                brand: formData.get('brand'),
+                model: formData.get('model'),
+                color: formData.get('color'),
+                owner: formData.get('owner'),
+                document: formData.get('document'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                status: formData.get('status'),
+                isParked: Math.random() > 0.5, // Random for demo
+                registrationDate: formData.get('registration-date'),
+                observations: formData.get('observations')
+            };
+            
+            if (currentVehicleId) {
+                // Update existing vehicle
+                const index = vehicles.findIndex(v => v.id === currentVehicleId);
+                if (index !== -1) {
+                    vehicles[index] = { ...vehicles[index], ...vehicleData };
+                }
+            } else {
+                // Add new vehicle
+                vehicles.push(vehicleData);
+            }
+            
+            // Reset and update
+            currentVehicleId = null;
+            renderVehicles();
+            updateStats();
+            
+            // Show success message (visual feedback)
+            showNotification('Vehículo guardado exitosamente', 'success');
+        }
+
+        // Delete vehicle
+        function deleteVehicle(id) {
+            if (confirm('¿Está seguro de eliminar este vehículo?')) {
+                const index = vehicles.findIndex(v => v.id === id);
+                if (index !== -1) {
+                    vehicles.splice(index, 1);
+                    renderVehicles();
+                    updateStats();
+                    showNotification('Vehículo eliminado exitosamente', 'success');
+                }
+            }
+        }
+
+        // Quick Actions Functions
+        function exportData() {
+            showNotification('Descargando datos de vehículos...', 'info');
+            // In a real implementation, this would generate and download a CSV/Excel file
+        }
+
+        function importData() {
+            showNotification('Seleccione el archivo para importar', 'info');
+            // In a real implementation, this would open a file dialog
+        }
+
+        function printList() {
+            window.print();
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                type === 'success' ? 'bg-green-100 text-green-800 border border-green-200' :
+                type === 'error' ? 'bg-red-100 text-red-800 border border-red-200' :
+                'bg-blue-100 text-blue-800 border border-blue-200'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i data-lucide="${
+                        type === 'success' ? 'check-circle' :
+                        type === 'error' ? 'alert-circle' : 'info'
+                    }" class="w-5 h-5 mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            lucide.createIcons();
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

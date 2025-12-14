@@ -307,6 +307,10 @@
                             <i data-lucide="shield" class="w-4 h-4"></i>
                             <span>Administración</span>
                         </a>
+                        <a href="senaPark.html" class="dropdown-item text-red-600" id="logout-button">
+                            <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
+                            Cerrar Sesión
+                        </a>
                     </nav>
 
                     <!-- User Menu -->
@@ -335,10 +339,6 @@
                                     Configuración
                                 </a>
                                 <div class="border-t border-gray-100 my-1"></div>
-                                <a href="#" class="dropdown-item text-red-600" id="logout-button">
-                                    <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
-                                    Cerrar Sesión
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -681,13 +681,17 @@
             }
 
             // Logout functionality
-            if (logoutButton) {
-                logoutButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.removeItem('auth');
-                    window.location.href = 'index.html';
-                });
-            }
+if (logoutButton) {
+    logoutButton.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Limpiar sesión
+        localStorage.removeItem('auth');
+
+        // Redirigir a la página principal
+        window.location.href = 'senaPark.html';
+    });
+}
 
             // Check authentication
             const auth = localStorage.getItem('auth');
